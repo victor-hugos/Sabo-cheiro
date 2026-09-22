@@ -66,11 +66,11 @@ export default function Header() {
         </div>
       </div>
       <div className="px-4 pb-3 md:hidden">{search}</div>
-      <nav className="hidden border-t border-brand-100 bg-white/60 lg:block">
-        <ul className="mx-auto flex max-w-7xl items-center justify-center gap-8 px-4 py-3 text-sm font-semibold uppercase tracking-wide text-brand-800">
-          <li><Link href="/produtos" className="hover:text-brand-500">Todos</Link></li>
+      <nav className="hidden bg-brand-700 lg:block">
+        <ul className="mx-auto flex max-w-7xl items-center justify-center gap-8 px-4 py-3 text-sm font-semibold uppercase tracking-wide text-cream">
+          <li><Link href="/produtos" className="transition hover:text-brand-300">Todos</Link></li>
           {categories.map((c) => (
-            <li key={c.slug}><Link href={`/produtos?categoria=${c.slug}`} className="hover:text-brand-500">{c.name}</Link></li>
+            <li key={c.slug}><Link href={`/produtos?categoria=${c.slug}`} className="transition hover:text-brand-300">{c.name}</Link></li>
           ))}
         </ul>
       </nav>

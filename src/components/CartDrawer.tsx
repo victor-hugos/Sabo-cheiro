@@ -50,7 +50,7 @@ export default function CartDrawer() {
                     <span className="text-sm text-brand-700">{formatPrice(product.price)}</span>
                     <div className="mt-auto flex items-center justify-between">
                       <QuantityInput value={quantity} max={product.stock} onChange={(q) => setQuantity(id, q)} small />
-                      <button onClick={() => remove(id)} className="text-xs text-gray-500 underline hover:text-red-600">Remover</button>
+                      <button onClick={() => remove(id)} className="text-xs text-gray-600 underline hover:text-red-600">Remover</button>
                     </div>
                   </div>
                 </li>
@@ -65,7 +65,7 @@ export default function CartDrawer() {
               <span>Subtotal</span>
               <strong>{formatPrice(subtotal)}</strong>
             </div>
-            <p className="mb-3 text-xs text-gray-500">Frete e cupom de desconto são calculados no checkout.</p>
+            <p className="mb-3 text-xs text-gray-600">Frete e cupom de desconto são calculados no checkout.</p>
             <Link href="/checkout" onClick={close} className="btn-primary w-full">Finalizar compra</Link>
             <Link href="/carrinho" onClick={close} className="mt-2 block text-center text-sm text-brand-700 underline">Ver carrinho completo</Link>
           </div>

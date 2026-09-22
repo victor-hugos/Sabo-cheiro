@@ -18,7 +18,7 @@ export default function Benefits() {
             </span>
             <div>
               <p className="text-sm font-bold text-brand-900">{title}</p>
-              <p className="text-xs text-gray-500">{text}</p>
+              <p className="text-xs text-gray-600">{text}</p>
             </div>
           </div>
         ))}

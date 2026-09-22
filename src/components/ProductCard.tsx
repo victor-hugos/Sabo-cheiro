@@ -34,10 +34,10 @@ export default function ProductCard({ product }: { product: Product }) {
         </Link>
         <span className="mt-1 text-xs text-brand-600">Fragrância: {fragranceOf(product)}</span>
         <div className="mt-2">
-          {product.compareAtPrice && <span className="mr-2 text-xs text-gray-400 line-through">{formatPrice(product.compareAtPrice)}</span>}
+          {product.compareAtPrice && <span className="mr-2 text-xs text-gray-500 line-through">{formatPrice(product.compareAtPrice)}</span>}
           <span className="text-lg font-bold text-brand-800">{formatPrice(product.price)}</span>
         </div>
-        {installments && <span className="text-xs text-gray-500">{installments}</span>}
+        {installments && <span className="text-xs text-gray-600">{installments}</span>}
         <span className="text-xs text-green-700">{formatPrice(pixPrice(product.price))} no PIX</span>
         <button
           onClick={() => add(product.id)}

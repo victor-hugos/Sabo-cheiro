@@ -38,7 +38,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: SP 
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8">
-      <nav className="mb-4 text-sm text-gray-500">
+      <nav className="mb-4 text-sm text-gray-600">
         <Link href="/" className="hover:underline">Início</Link> / <span>{title}</span>
       </nav>
       <h1 className="font-display text-3xl font-bold text-brand-900">{title}</h1>
@@ -94,7 +94,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: SP 
       )}
 
       <div className="mb-4 mt-4 flex items-center justify-between">
-        <p className="text-sm text-gray-500">{list.length} {list.length === 1 ? "produto" : "produtos"}</p>
+        <p className="text-sm text-gray-600">{list.length} {list.length === 1 ? "produto" : "produtos"}</p>
         <Suspense><SortSelect /></Suspense>
       </div>
       {list.length === 0 ? (

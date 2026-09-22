@@ -50,7 +50,7 @@ export default async function ProductPage({ params }: { params: Params }) {
   return (
     <>
       <div className="mx-auto max-w-7xl px-4 py-8">
-        <nav className="mb-6 text-sm text-gray-500">
+        <nav className="mb-6 text-sm text-gray-600">
           <Link href="/" className="hover:underline">Início</Link> /{" "}
           {category && <><Link href={`/produtos?categoria=${category.slug}`} className="hover:underline">{category.name}</Link> / </>}
           <span>{product.name}</span>
@@ -59,7 +59,7 @@ export default async function ProductPage({ params }: { params: Params }) {
           <Gallery images={product.images} alt={product.name} />
           <div>
             <h1 className="font-display text-3xl font-bold text-brand-900 sm:text-4xl">{product.name}</h1>
-            <p className="mt-1 text-sm text-gray-500">Cód. {product.id}</p>
+            <p className="mt-1 text-sm text-gray-600">Cód. {product.id}</p>
             {product.tags?.includes("preco-lancamento") && (
               <span className="mt-3 inline-block rounded-full bg-brand-100 px-3 py-1 text-xs font-bold text-brand-800">Preço de lançamento</span>
             )}
@@ -76,7 +76,7 @@ export default async function ProductPage({ params }: { params: Params }) {
             </dl>
 
             <div className="mt-6 rounded-2xl bg-white p-5 ring-1 ring-brand-100">
-              {product.compareAtPrice && <p className="text-sm text-gray-400 line-through">{formatPrice(product.compareAtPrice)}</p>}
+              {product.compareAtPrice && <p className="text-sm text-gray-500 line-through">{formatPrice(product.compareAtPrice)}</p>}
               <p className="text-3xl font-bold text-brand-800">{formatPrice(product.price)}</p>
               {installments && <p className="text-sm text-gray-600">ou {installments}</p>}
               <p className="mt-1 text-sm font-semibold text-green-700">
@@ -87,14 +87,14 @@ export default async function ProductPage({ params }: { params: Params }) {
                 href={productWhatsappLink(product.name)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-outline mt-3 w-full gap-2 border-[#25D366] text-[#128C7E] hover:bg-[#25D366]/10"
+                className="btn-outline mt-3 w-full gap-2 border-[#25D366] text-[#075E54] hover:bg-[#25D366]/10"
               >
                 Tirar dúvidas no WhatsApp
               </a>
               {product.stock > 0 && product.stock <= 10 && (
                 <p className="mt-3 text-sm font-semibold text-accent">Restam apenas {product.stock} unidades!</p>
               )}
-              <p className="mt-4 text-sm text-gray-500">
+              <p className="mt-4 text-sm text-gray-600">
                 🏷️ Use o cupom <strong>{site.couponBanner}</strong> no checkout e ganhe {Math.round((site.coupons[site.couponBanner] ?? 0) * 100)}% OFF
               </p>
             </div>

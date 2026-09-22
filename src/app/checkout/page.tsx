@@ -152,7 +152,7 @@ export default function CheckoutPage() {
                 </label>
               ))}
             </div>
-            <p className="mt-3 text-xs text-gray-500">Você será direcionado para um ambiente seguro para concluir o pagamento.</p>
+            <p className="mt-3 text-xs text-gray-600">Você será direcionado para um ambiente seguro para concluir o pagamento.</p>
           </section>
         </div>
 
@@ -200,7 +200,7 @@ export default function CheckoutPage() {
           <button type="submit" disabled={loading} className="btn-primary mt-6 w-full">
             {loading ? "Processando..." : "Confirmar pedido"}
           </button>
-          <p className="mt-3 text-center text-xs text-gray-500">🔒 Compra 100% segura</p>
+          <p className="mt-3 text-center text-xs text-gray-600">🔒 Compra 100% segura</p>
         </aside>
       </form>
     </div>

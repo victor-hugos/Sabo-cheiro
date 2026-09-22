@@ -31,11 +31,11 @@ export default function CartPage() {
               <div className="flex flex-1 flex-col gap-2 sm:flex-row sm:items-center">
                 <div className="flex-1">
                   <Link href={`/produto/${product.slug}`} className="font-semibold text-brand-900 hover:underline">{product.name}</Link>
-                  <p className="text-sm text-gray-500">{formatPrice(product.price)} cada</p>
+                  <p className="text-sm text-gray-600">{formatPrice(product.price)} cada</p>
                 </div>
                 <QuantityInput value={quantity} max={product.stock} onChange={(q) => setQuantity(id, q)} small />
                 <p className="w-24 font-bold text-brand-800 sm:text-right">{formatPrice(product.price * quantity)}</p>
-                <button onClick={() => remove(id)} className="text-left text-xs text-gray-500 underline hover:text-red-600">Remover</button>
+                <button onClick={() => remove(id)} className="text-left text-xs text-gray-600 underline hover:text-red-600">Remover</button>
               </div>
             </li>
           ))}
@@ -49,7 +49,7 @@ export default function CartPage() {
             <p className="text-right text-xs text-green-700">
               ou {formatPrice(pixPrice(subtotal) + shipping)} no PIX ({Math.round(site.pixDiscount * 100)}% OFF nos produtos)
             </p>
-            <p className="text-right text-xs text-gray-500">Tem cupom? Aplique no checkout.</p>
+            <p className="text-right text-xs text-gray-600">Tem cupom? Aplique no checkout.</p>
           </dl>
           <Link href="/checkout" className="btn-primary mt-6 w-full">Finalizar compra</Link>
           <Link href="/produtos" className="mt-3 block text-center text-sm text-brand-700 underline">Continuar comprando</Link>
