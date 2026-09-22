@@ -4,7 +4,7 @@ import Benefits from "@/components/Benefits";
 import HeroCarousel from "@/components/HeroCarousel";
 import Newsletter from "@/components/Newsletter";
 import ProductShelf from "@/components/ProductShelf";
-import { categories, productsByTag } from "@/data/products";
+import { categories, products } from "@/data/products";
 
 export default function Home() {
   return (
@@ -26,9 +26,9 @@ export default function Home() {
         </div>
       </section>
 
-      <ProductShelf title="Mais vendidos" products={productsByTag("mais-vendido")} href="/produtos?tag=mais-vendido" />
+      <ProductShelf title="Nossos sabonetes" products={products} href="/produtos" />
 
-      <section className="mx-auto grid max-w-7xl gap-4 px-4 md:grid-cols-2">
+      <section className="mx-auto grid max-w-7xl gap-4 px-4 pb-12 md:grid-cols-2">
         {[
           { href: "/produtos?categoria=florais", image: "/banners/florais.jpg", kicker: "Coleção", title: "Florais em relevo", cta: "Ver florais" },
           { href: "/produtos?categoria=especiais", image: "/produtos/decorado-1.jpg", kicker: "Presenteie", title: "Especiais e decorados", cta: "Ver especiais" },
@@ -44,8 +44,6 @@ export default function Home() {
           </Link>
         ))}
       </section>
-
-      <ProductShelf title="Lançamentos" products={productsByTag("lancamento")} href="/produtos?tag=lancamento" />
 
       <section className="mx-auto max-w-7xl px-4 pb-12">
         <div className="grid items-center gap-8 rounded-3xl bg-white p-8 ring-1 ring-brand-100 md:grid-cols-2 md:p-12">

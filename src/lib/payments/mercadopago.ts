@@ -9,16 +9,17 @@ export const mercadoPago: PaymentProvider = {
     if (!token) throw new Error("MERCADOPAGO_ACCESS_TOKEN não configurado");
 
     const [firstName, ...rest] = order.customer.name.trim().split(" ");
-    const items = order.items.map((i) => ({
-      id: i.id,
-      title: i.name,
-      quantity: i.quantity,
-      unit_price: i.unitPrice,
-      currency_id: "BRL",
-    }));
-    if (order.discount > 0) {
-      items.push({ id: "DESCONTO", title: "Desconto PIX", quantity: 1, unit_price: -order.discount, currency_id: "BRL" });
-    }
+    // Com desconto, envia um item único com o valor já descontado (o Mercado Pago não aceita preço negativo).
+    const items =
+      order.discount > 0
+        ? [{
+            id: order.id,
+            title: `Pedido ${order.id} (${order.items.reduce((s, i) => s + i.quantity, 0)} itens)`,
+            quantity: 1,
+            unit_price: Math.round((order.subtotal - order.discount) * 100) / 100,
+            currency_id: "BRL",
+          }]
+        : order.items.map((i) => ({ id: i.id, title: i.name, quantity: i.quantity, unit_price: i.unitPrice, currency_id: "BRL" }));
 
     const res = await fetch("https://api.mercadopago.com/checkout/preferences", {
       method: "POST",

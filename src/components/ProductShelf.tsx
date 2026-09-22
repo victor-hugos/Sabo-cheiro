@@ -10,7 +10,7 @@ export default function ProductShelf({ title, products, href }: { title: string;
         <h2 className="font-display text-2xl font-bold text-brand-900 sm:text-3xl">{title}</h2>
         {href && <Link href={href} className="text-sm font-semibold text-brand-600 underline">Ver todos</Link>}
       </div>
-      <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
         {products.slice(0, 8).map((p) => <ProductCard key={p.id} product={p} />)}
       </div>
     </section>

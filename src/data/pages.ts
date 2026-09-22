@@ -22,9 +22,7 @@ O reembolso é feito pelo mesmo meio de pagamento em até 10 dias úteis após o
     title: "Prazos de entrega",
     body: `Os pedidos são separados e postados em até 2 dias úteis após a confirmação do pagamento.
 
-Enviamos para todo o Brasil via Correios ou transportadora. O prazo de entrega varia de acordo com a região e é informado junto com o código de rastreio.
-
-Frete grátis para compras acima de R$ ${site.freeShippingFrom},00.`,
+Enviamos para todo o Brasil via Correios ou transportadora. O prazo de entrega varia de acordo com a região e é informado junto com o código de rastreio.`,
   },
   privacidade: {
     title: "Política de privacidade",

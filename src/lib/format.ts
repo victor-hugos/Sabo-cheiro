@@ -17,6 +17,24 @@ export function pixPrice(value: number) {
 }
 
 export function shippingFor(subtotal: number) {
-  if (subtotal <= 0) return 0;
-  return subtotal >= site.freeShippingFrom ? 0 : site.flatShipping;
+  return subtotal > 0 ? site.flatShipping : 0;
+}
+
+const round = (n: number) => Math.round(n * 100) / 100;
+
+export function normalizeCoupon(code: string | undefined | null) {
+  return (code ?? "").trim().toUpperCase();
+}
+
+export function couponRate(code: string | undefined | null) {
+  return site.coupons[normalizeCoupon(code)] ?? 0;
+}
+
+// Cálculo único dos totais, usado no navegador (resumo) e no servidor (valor cobrado).
+export function orderTotals(subtotal: number, paymentMethod: string, coupon?: string | null) {
+  const shipping = shippingFor(subtotal);
+  const couponDiscount = round(subtotal * couponRate(coupon));
+  const pixDiscount = paymentMethod === "pix" ? round((subtotal - couponDiscount) * site.pixDiscount) : 0;
+  const discount = round(couponDiscount + pixDiscount);
+  return { shipping, couponDiscount, pixDiscount, discount, total: round(subtotal + shipping - discount) };
 }

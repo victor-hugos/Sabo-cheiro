@@ -45,7 +45,11 @@ function Content({ status }: { status: keyof typeof copy }) {
               <li key={i.id} className="flex justify-between"><span>{i.quantity}× {i.name}</span><span>{formatPrice(i.unitPrice * i.quantity)}</span></li>
             ))}
           </ul>
-          <p className="mt-3 flex justify-between border-t border-brand-100 pt-3 font-bold"><span>Total</span><span>{formatPrice(order.total)}</span></p>
+          <p className="mt-3 flex justify-between border-t border-brand-100 pt-3 text-sm"><span>Frete</span><span>{formatPrice(order.shipping)}</span></p>
+          {order.discount > 0 && (
+            <p className="flex justify-between text-sm text-green-700"><span>Descontos{order.coupon ? ` (cupom ${order.coupon})` : ""}</span><span>-{formatPrice(order.discount)}</span></p>
+          )}
+          <p className="mt-2 flex justify-between border-t border-brand-100 pt-3 font-bold"><span>Total</span><span>{formatPrice(order.total)}</span></p>
           {manual && order.paymentMethod === "pix" && (
             <div className="mt-4 rounded-xl bg-brand-50 p-4 text-sm">
               <p className="font-semibold text-brand-900">Pague via PIX</p>

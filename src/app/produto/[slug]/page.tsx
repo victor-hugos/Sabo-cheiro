@@ -72,7 +72,9 @@ export default async function ProductPage({ params }: { params: Params }) {
               {product.stock > 0 && product.stock <= 10 && (
                 <p className="mt-3 text-sm font-semibold text-accent">Restam apenas {product.stock} unidades!</p>
               )}
-              <p className="mt-4 text-sm text-gray-500">🚚 Frete grátis em compras acima de {formatPrice(site.freeShippingFrom)}</p>
+              <p className="mt-4 text-sm text-gray-500">
+                🏷️ Use o cupom <strong>{site.couponBanner}</strong> no checkout e ganhe {Math.round((site.coupons[site.couponBanner] ?? 0) * 100)}% OFF
+              </p>
             </div>
 
             <div className="mt-8 space-y-4">

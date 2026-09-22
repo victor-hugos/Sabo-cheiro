@@ -44,11 +44,12 @@ export default function CartPage() {
           <h2 className="mb-4 text-lg font-bold text-brand-900">Resumo</h2>
           <dl className="space-y-2 text-sm">
             <div className="flex justify-between"><dt>Subtotal</dt><dd>{formatPrice(subtotal)}</dd></div>
-            <div className="flex justify-between"><dt>Frete</dt><dd>{shipping === 0 ? <span className="font-semibold text-green-700">Grátis</span> : formatPrice(shipping)}</dd></div>
+            <div className="flex justify-between"><dt>Frete</dt><dd>{formatPrice(shipping)}</dd></div>
             <div className="flex justify-between border-t border-brand-100 pt-2 text-base font-bold"><dt>Total</dt><dd>{formatPrice(total)}</dd></div>
             <p className="text-right text-xs text-green-700">
               ou {formatPrice(pixPrice(subtotal) + shipping)} no PIX ({Math.round(site.pixDiscount * 100)}% OFF nos produtos)
             </p>
+            <p className="text-right text-xs text-gray-500">Tem cupom? Aplique no checkout.</p>
           </dl>
           <Link href="/checkout" className="btn-primary mt-6 w-full">Finalizar compra</Link>
           <Link href="/produtos" className="mt-3 block text-center text-sm text-brand-700 underline">Continuar comprando</Link>

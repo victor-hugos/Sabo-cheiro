@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { site } from "@/data/site";
-import { formatPrice } from "@/lib/format";
+import { couponRate, formatPrice, normalizeCoupon, orderTotals } from "@/lib/format";
 import type { Address, Customer, Order, PaymentMethod, PaymentResult } from "@/lib/payments/types";
 
 const maskCpf = (v: string) =>
@@ -18,7 +18,7 @@ const maskCep = (v: string) => v.replace(/\D/g, "").slice(0, 8).replace(/(\d{5})
 const UFS = "AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO".split(" ");
 
 export default function CheckoutPage() {
-  const { items, subtotal, shipping, clear } = useCart();
+  const { items, subtotal, clear } = useCart();
   const router = useRouter();
   const [customer, setCustomer] = useState<Customer>({ name: "", email: "", phone: "", cpf: "" });
   const [address, setAddress] = useState<Address>({ cep: "", street: "", number: "", complement: "", district: "", city: "", state: "" });
@@ -26,9 +26,23 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false);
   const [cepLoading, setCepLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [couponInput, setCouponInput] = useState("");
+  const [coupon, setCoupon] = useState<string | null>(null);
+  const [couponError, setCouponError] = useState<string | null>(null);
 
-  const discount = method === "pix" ? Math.round(subtotal * site.pixDiscount * 100) / 100 : 0;
-  const total = subtotal + shipping - discount;
+  const { shipping, couponDiscount, pixDiscount, total } = orderTotals(subtotal, method, coupon);
+
+  function applyCoupon() {
+    const code = normalizeCoupon(couponInput);
+    if (!code) return;
+    if (couponRate(code)) {
+      setCoupon(code);
+      setCouponError(null);
+    } else {
+      setCoupon(null);
+      setCouponError("Cupom inválido.");
+    }
+  }
 
   async function lookupCep(cep: string) {
     const digits = cep.replace(/\D/g, "");
@@ -52,7 +66,7 @@ export default function CheckoutPage() {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ customer, address, paymentMethod: method, items: items.map(({ id, quantity }) => ({ id, quantity })) }),
+        body: JSON.stringify({ customer, address, paymentMethod: method, coupon, items: items.map(({ id, quantity }) => ({ id, quantity })) }),
       });
       const data = (await res.json()) as { error?: string; order?: Order; payment?: PaymentResult };
       if (!res.ok || !data.order || !data.payment) throw new Error(data.error || "Erro ao finalizar pedido.");
@@ -153,10 +167,33 @@ export default function CheckoutPage() {
               </li>
             ))}
           </ul>
+          <div className="mb-4 border-t border-brand-100 pt-4">
+            <span className="label">Cupom de desconto</span>
+            {coupon ? (
+              <div className="flex items-center justify-between rounded-lg bg-green-50 px-3 py-2.5 text-sm text-green-800">
+                <span><strong>{coupon}</strong> aplicado ({Math.round(couponRate(coupon) * 100)}% OFF)</span>
+                <button type="button" onClick={() => { setCoupon(null); setCouponInput(""); }} className="text-xs underline">Remover</button>
+              </div>
+            ) : (
+              <div className="flex gap-2">
+                <input
+                  className="input uppercase"
+                  value={couponInput}
+                  onChange={(e) => setCouponInput(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); applyCoupon(); } }}
+                  placeholder={site.couponBanner}
+                  aria-label="Cupom de desconto"
+                />
+                <button type="button" onClick={applyCoupon} className="btn-outline px-4 py-2 text-sm">Aplicar</button>
+              </div>
+            )}
+            {couponError && <p className="mt-1 text-xs text-red-600">{couponError}</p>}
+          </div>
           <dl className="space-y-2 border-t border-brand-100 pt-4 text-sm">
             <div className="flex justify-between"><dt>Subtotal</dt><dd>{formatPrice(subtotal)}</dd></div>
-            <div className="flex justify-between"><dt>Frete</dt><dd>{shipping === 0 ? <span className="font-semibold text-green-700">Grátis</span> : formatPrice(shipping)}</dd></div>
-            {discount > 0 && <div className="flex justify-between text-green-700"><dt>Desconto PIX</dt><dd>-{formatPrice(discount)}</dd></div>}
+            <div className="flex justify-between"><dt>Frete</dt><dd>{formatPrice(shipping)}</dd></div>
+            {couponDiscount > 0 && <div className="flex justify-between text-green-700"><dt>Cupom {coupon}</dt><dd>-{formatPrice(couponDiscount)}</dd></div>}
+            {pixDiscount > 0 && <div className="flex justify-between text-green-700"><dt>Desconto PIX</dt><dd>-{formatPrice(pixDiscount)}</dd></div>}
             <div className="flex justify-between border-t border-brand-100 pt-2 text-lg font-bold"><dt>Total</dt><dd>{formatPrice(total)}</dd></div>
           </dl>
           {error && <p role="alert" className="mt-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p>}

@@ -10,9 +10,10 @@ export const site = {
   cnpj: "00.000.000/0001-00",
   address: "São Paulo - SP",
   pixKey: "contato@sabocheiro.com.br",
-  freeShippingFrom: 199, // frete grátis a partir de (R$)
-  flatShipping: 19.9, // frete fixo abaixo do valor acima (R$)
+  flatShipping: 19.9, // frete fixo por pedido (R$)
   maxInstallments: 6, // parcelas sem juros
   pixDiscount: 0.05, // 5% de desconto no PIX
   couponBanner: "PRIMEIRACOMPRA", // cupom exibido na barra do topo
+  // Cupons válidos no checkout: CÓDIGO -> desconto (0.1 = 10% sobre os produtos)
+  coupons: { PRIMEIRACOMPRA: 0.1 } as Record<string, number>,
 };

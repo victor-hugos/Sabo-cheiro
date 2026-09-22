@@ -4,15 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
 import { useCart } from "@/context/CartContext";
-import { site } from "@/data/site";
 import { formatPrice } from "@/lib/format";
 import { CloseIcon } from "./Icons";
 import QuantityInput from "./QuantityInput";
 
 export default function CartDrawer() {
   const { items, isOpen, close, subtotal, setQuantity, remove } = useCart();
-  const missing = site.freeShippingFrom - subtotal;
-  const progress = Math.min(100, (subtotal / site.freeShippingFrom) * 100);
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
@@ -33,19 +30,6 @@ export default function CartDrawer() {
           <h2 className="font-display text-xl font-bold text-brand-900">Meu carrinho</h2>
           <button onClick={close} aria-label="Fechar carrinho" className="rounded-full p-1 hover:bg-brand-50"><CloseIcon /></button>
         </div>
-
-        {items.length > 0 && (
-          <div className="border-b border-brand-100 px-5 py-3 text-sm">
-            {missing > 0 ? (
-              <p>Faltam <strong>{formatPrice(missing)}</strong> para ganhar <strong>frete grátis</strong>!</p>
-            ) : (
-              <p className="font-semibold text-green-700">Parabéns! Você ganhou frete grátis 🎉</p>
-            )}
-            <div className="mt-2 h-2 overflow-hidden rounded-full bg-brand-100">
-              <div className="h-full rounded-full bg-brand-500 transition-all" style={{ width: `${progress}%` }} />
-            </div>
-          </div>
-        )}
 
         <div className="flex-1 overflow-y-auto px-5 py-4">
           {items.length === 0 ? (
@@ -80,6 +64,7 @@ export default function CartDrawer() {
               <span>Subtotal</span>
               <strong>{formatPrice(subtotal)}</strong>
             </div>
+            <p className="mb-3 text-xs text-gray-500">Frete e cupom de desconto são calculados no checkout.</p>
             <Link href="/checkout" onClick={close} className="btn-primary w-full">Finalizar compra</Link>
             <Link href="/carrinho" onClick={close} className="mt-2 block text-center text-sm text-brand-700 underline">Ver carrinho completo</Link>
           </div>

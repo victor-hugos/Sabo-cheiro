@@ -32,7 +32,10 @@ export type Order = {
   items: OrderItem[];
   subtotal: number;
   shipping: number;
-  discount: number;
+  coupon?: string;
+  couponDiscount: number;
+  pixDiscount: number;
+  discount: number; // couponDiscount + pixDiscount
   total: number;
   paymentMethod: PaymentMethod;
 };

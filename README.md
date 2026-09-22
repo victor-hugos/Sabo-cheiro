@@ -1,13 +1,14 @@
 # Sabo Cheiro — Loja virtual de sabonetes artesanais
 
-E-commerce completo em **Next.js 15 (App Router) + TypeScript + Tailwind CSS**, no estilo das lojas de cosméticos brasileiras (vitrines, carrinho lateral, PIX com desconto, parcelamento, frete grátis progressivo, WhatsApp).
+E-commerce completo em **Next.js 15 (App Router) + TypeScript + Tailwind CSS**, no estilo das lojas de cosméticos brasileiras (vitrines, carrinho lateral, PIX com desconto, parcelamento, cupom de desconto, WhatsApp).
 
 ## Funcionalidades
 
 - Home com barra de avisos, banner carrossel, benefícios, categorias, vitrines (mais vendidos, lançamentos), banners promocionais e newsletter
 - Catálogo com filtro por categoria, busca (sem acento), ofertas/lançamentos e ordenação
 - Página de produto com galeria, preço "de/por", parcelas, preço no PIX, estoque baixo e SEO (JSON-LD)
-- Carrinho lateral + página de carrinho, salvo no navegador, com barra de progresso até o frete grátis
+- Carrinho lateral + página de carrinho, salvo no navegador
+- Cupons de desconto (ex.: `PRIMEIRACOMPRA` = 10% OFF), validados no servidor
 - Checkout com máscaras (CPF, telefone, CEP), validação de CPF, busca de endereço pelo CEP (ViaCEP) e escolha de PIX, cartão ou boleto
 - API `/api/checkout` que **recalcula preços, frete e desconto no servidor** (o navegador nunca define o valor)
 - Gateways prontos: **Mercado Pago (Checkout Pro)**, **Stripe Checkout** ou **manual** (PIX/WhatsApp, sem gateway)
@@ -27,7 +28,7 @@ npm run dev        # http://localhost:3000
 
 | O quê | Arquivo |
 |---|---|
-| Nome da loja, WhatsApp, e-mail, chave PIX, frete grátis, parcelas, desconto PIX | `src/data/site.ts` |
+| Nome da loja, WhatsApp, e-mail, chave PIX, frete, cupons, parcelas, desconto PIX | `src/data/site.ts` |
 | Produtos e categorias | `src/data/products.ts` |
 | Fotos dos produtos | `public/produtos/` |
 | Banners da home | `src/components/HeroCarousel.tsx` |

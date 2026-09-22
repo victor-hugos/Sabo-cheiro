@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { getProductById } from "@/data/products";
-import { site } from "@/data/site";
-import { shippingFor } from "@/lib/format";
+import { couponRate, normalizeCoupon, orderTotals } from "@/lib/format";
 import { getPaymentProvider, type Address, type Customer, type Order, type PaymentMethod } from "@/lib/payments";
 import { saveOrder } from "@/lib/orders/store";
 
@@ -10,6 +9,7 @@ type Body = {
   address: Address;
   items: { id: string; quantity: number }[];
   paymentMethod: PaymentMethod;
+  coupon?: string;
 };
 
 const round = (n: number) => Math.round(n * 100) / 100;
@@ -37,6 +37,7 @@ function validate(body: Body): string | null {
   if (!a.street || !a.number || !a.district || !a.city || !a.state) return "Endereço incompleto.";
   if (!Array.isArray(body.items) || body.items.length === 0) return "Carrinho vazio.";
   if (!["pix", "card", "boleto"].includes(body.paymentMethod)) return "Forma de pagamento inválida.";
+  if (normalizeCoupon(body.coupon) && !couponRate(body.coupon)) return "Cupom inválido.";
   return null;
 }
 
@@ -66,8 +67,8 @@ export async function POST(req: Request) {
   }
 
   const subtotal = round(items.reduce((s, i) => s + i.unitPrice * i.quantity, 0));
-  const shipping = shippingFor(subtotal);
-  const discount = body.paymentMethod === "pix" ? round(subtotal * site.pixDiscount) : 0;
+  const coupon = normalizeCoupon(body.coupon) || undefined;
+  const totals = orderTotals(subtotal, body.paymentMethod, coupon);
 
   const order: Order = {
     id: `SC${Date.now().toString(36).toUpperCase()}${Math.random().toString(36).slice(2, 6).toUpperCase()}`,
@@ -76,9 +77,8 @@ export async function POST(req: Request) {
     address: body.address,
     items,
     subtotal,
-    shipping,
-    discount,
-    total: round(subtotal + shipping - discount),
+    coupon,
+    ...totals,
     paymentMethod: body.paymentMethod,
   };
 

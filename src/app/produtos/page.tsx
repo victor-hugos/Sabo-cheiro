@@ -41,40 +41,33 @@ export default async function ProductsPage({ searchParams }: { searchParams: SP 
       <h1 className="font-display text-3xl font-bold text-brand-900">{title}</h1>
       {category && <p className="mt-1 text-gray-600">{category.description}</p>}
 
-      <div className="mt-6 flex flex-col gap-6 lg:flex-row">
-        <aside className="lg:w-56 lg:shrink-0">
-          <p className="label mb-2">Categorias</p>
-          <ul className="flex gap-2 overflow-x-auto pb-2 text-sm lg:flex-col lg:gap-1">
-            <li>
-              <Link href="/produtos" className={`block whitespace-nowrap rounded-full px-3 py-1.5 lg:rounded-lg ${!category ? "bg-brand-600 text-white" : "bg-white ring-1 ring-brand-100 hover:bg-brand-50"}`}>Todas</Link>
-            </li>
-            {categories.map((c) => (
-              <li key={c.slug}>
-                <Link href={`/produtos?categoria=${c.slug}`} className={`block whitespace-nowrap rounded-full px-3 py-1.5 lg:rounded-lg ${category?.slug === c.slug ? "bg-brand-600 text-white" : "bg-white ring-1 ring-brand-100 hover:bg-brand-50"}`}>
-                  {c.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </aside>
+      <ul className="mt-6 flex gap-2 overflow-x-auto pb-2 text-sm">
+        <li>
+          <Link href="/produtos" className={`block whitespace-nowrap rounded-full px-4 py-2 ${!category ? "bg-brand-600 text-white" : "bg-white ring-1 ring-brand-100 hover:bg-brand-50"}`}>Todos</Link>
+        </li>
+        {categories.map((c) => (
+          <li key={c.slug}>
+            <Link href={`/produtos?categoria=${c.slug}`} className={`block whitespace-nowrap rounded-full px-4 py-2 ${category?.slug === c.slug ? "bg-brand-600 text-white" : "bg-white ring-1 ring-brand-100 hover:bg-brand-50"}`}>
+              {c.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
 
-        <div className="flex-1">
-          <div className="mb-4 flex items-center justify-between">
-            <p className="text-sm text-gray-500">{list.length} {list.length === 1 ? "produto" : "produtos"}</p>
-            <Suspense><SortSelect /></Suspense>
-          </div>
-          {list.length === 0 ? (
-            <div className="rounded-2xl bg-white p-10 text-center ring-1 ring-brand-100">
-              <p>Nenhum produto encontrado.</p>
-              <Link href="/produtos" className="btn-primary mt-4">Ver todos</Link>
-            </div>
-          ) : (
-            <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3">
-              {list.map((p) => <ProductCard key={p.id} product={p} />)}
-            </div>
-          )}
-        </div>
+      <div className="mb-4 mt-4 flex items-center justify-between">
+        <p className="text-sm text-gray-500">{list.length} {list.length === 1 ? "produto" : "produtos"}</p>
+        <Suspense><SortSelect /></Suspense>
       </div>
+      {list.length === 0 ? (
+        <div className="rounded-2xl bg-white p-10 text-center ring-1 ring-brand-100">
+          <p>Nenhum produto encontrado.</p>
+          <Link href="/produtos" className="btn-primary mt-4">Ver todos</Link>
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
+          {list.map((p) => <ProductCard key={p.id} product={p} />)}
+        </div>
+      )}
     </div>
   );
 }

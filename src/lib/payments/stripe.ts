@@ -16,7 +16,11 @@ export const stripe: PaymentProvider = {
     params.set("cancel_url", `${siteUrl}/pedido/falha?pedido=${order.id}`);
     params.set("metadata[order_id]", order.id);
 
-    const lines = [...order.items];
+    // Com desconto, envia uma linha única com o valor já descontado (Stripe não aceita valor negativo).
+    const lines =
+      order.discount > 0
+        ? [{ id: order.id, name: `Pedido ${order.id}`, unitPrice: Math.round((order.subtotal - order.discount) * 100) / 100, quantity: 1 }]
+        : [...order.items];
     if (order.shipping > 0) lines.push({ id: "FRETE", name: "Frete", unitPrice: order.shipping, quantity: 1 });
     lines.forEach((item, i) => {
       params.set(`line_items[${i}][quantity]`, String(item.quantity));
