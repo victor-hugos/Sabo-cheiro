@@ -13,6 +13,7 @@ export default function CartDrawer() {
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
+    document.body.dataset.cartOpen = String(isOpen);
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && close();
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);

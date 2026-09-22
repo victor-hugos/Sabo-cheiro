@@ -9,21 +9,21 @@ import { ChevronLeft, ChevronRight } from "./Icons";
 const slides = [
   {
     title: "Um banho que vira ritual",
-    text: "Sabonetes artesanais feitos à mão, um a um.",
+    text: "Sabonetes artesanais com manteiga de karité e óleo de amêndoas, feitos à mão para quem ama um bom cheiro.",
     cta: "Conheça a coleção",
     href: "/produtos",
     image: "/banners/colecao.jpg",
   },
   {
     title: "Coleção Florais",
-    text: "Relevos delicados em rosa, verde e perolado.",
+    text: "Relevos delicados em rosa, verde e perolado, com a mesma base cremosa.",
     cta: "Ver florais",
     href: "/produtos?categoria=florais",
     image: "/banners/florais.jpg",
   },
   {
     title: "Massageadores",
-    text: "Pinos em relevo que massageiam a pele durante o banho.",
+    text: "Pinos em relevo que massageiam a pele enquanto a espuma cremosa faz o resto.",
     cta: "Ver massageadores",
     href: "/produtos?categoria=massageadores",
     image: "/produtos/massageador-laranja-2.jpg",

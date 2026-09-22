@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { pages } from "@/data/pages";
-import { site } from "@/data/site";
+import { whatsappLink } from "@/lib/whatsapp";
 
 type Params = Promise<{ slug: string }>;
 
@@ -25,7 +25,7 @@ export default async function InstitutionalPage({ params }: { params: Params }) 
         {page.body.split("\n\n").map((p) => <p key={p}>{p}</p>)}
       </div>
       {slug === "contato" && (
-        <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer" className="btn-primary mt-8">Chamar no WhatsApp</a>
+        <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="btn-primary mt-8">Chamar no WhatsApp</a>
       )}
     </div>
   );

@@ -4,7 +4,7 @@ import { CardIcon, LeafIcon, ShieldIcon } from "./Icons";
 const items = [
   { icon: CardIcon, title: `Até ${site.maxInstallments}x sem juros`, text: `ou ${Math.round(site.pixDiscount * 100)}% OFF no PIX` },
   { icon: ShieldIcon, title: "Compra segura", text: "Site protegido com SSL" },
-  { icon: LeafIcon, title: "100% artesanal", text: "Feito à mão, um a um" },
+  { icon: LeafIcon, title: "100% artesanal", text: "Feito à mão, em pequenos lotes" },
 ];
 
 export default function Benefits() {

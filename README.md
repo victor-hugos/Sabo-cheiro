@@ -28,7 +28,8 @@ npm run dev        # http://localhost:3000
 
 | O quê | Arquivo |
 |---|---|
-| Nome da loja, WhatsApp, e-mail, chave PIX, frete, cupons, parcelas, desconto PIX | `src/data/site.ts` |
+| Nome da loja, WhatsApp (número e mensagem), e-mail, Instagram, chave PIX, frete, cupons, parcelas, desconto PIX | `src/data/site.ts` |
+| Links do WhatsApp (botão flutuante, produto, rodapé) | `src/lib/whatsapp.ts` |
 | Produtos e categorias | `src/data/products.ts` |
 | Fotos dos produtos | `public/produtos/` |
 | Banners da home | `src/components/HeroCarousel.tsx` |
@@ -50,13 +51,15 @@ npm run dev        # http://localhost:3000
      images: ["/produtos/camomila.jpg", "/produtos/camomila-2.jpg"],
      shortDescription: "...",
      description: "...",
-     ingredients: "...",                // opcional
-     weight: "100 g",                   // opcional
-     tags: ["lancamento"],              // "mais-vendido" | "lancamento" | "promocao"
+     fragrance: "Amadeirada fresca",    // vazio = aparece "[definir fragrância]"; fragrâncias definidas viram filtro no catálogo
+     weight: "145 g",                   // vazio = aparece "[confirmar peso]"
+     ingredients: "...",                // opcional (seção "Composição")
+     tags: ["lancamento"],              // "mais-vendido" | "lancamento" | "promocao" | "preco-lancamento" | "kit"
      stock: 20,
    }
    ```
-3. Os **preços, estoques e nomes atuais são provisórios**. Confirme cada um antes de publicar.
+3. Os **estoques, fragrâncias e pesos ainda precisam ser confirmados** (aparecem como `[definir fragrância]` / `[confirmar peso]`).
+4. E-mail, Instagram e chave PIX ficam **ocultos enquanto estiverem vazios** em `site.ts` — não preencha com dados de exemplo.
 
 ## Pagamentos
 

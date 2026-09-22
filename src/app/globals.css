@@ -8,6 +8,19 @@
   }
 }
 
+/* Botão flutuante do WhatsApp: some com o carrinho lateral ou o menu do celular abertos. */
+body[data-cart-open="true"] .wa-float,
+body[data-menu-open="true"] .wa-float {
+  display: none;
+}
+
+/* Espaço no fim da página para o botão flutuante não cobrir o último conteúdo no celular. */
+@media (max-width: 639px) {
+  body {
+    padding-bottom: 5rem;
+  }
+}
+
 @layer components {
   .btn-primary {
     @apply inline-flex items-center justify-center rounded-full bg-brand-600 px-6 py-3 font-bold text-white transition hover:bg-brand-700 disabled:cursor-not-allowed disabled:bg-gray-300;

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import type { Product } from "@/data/products";
+import { fragranceOf, type Product } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 import { formatPrice, installmentText, pixPrice } from "@/lib/format";
 
@@ -24,12 +24,15 @@ export default function ProductCard({ product }: { product: Product }) {
         <div className="absolute left-2 top-2 flex flex-col gap-1">
           {off > 0 && <span className="rounded-full bg-accent px-2 py-0.5 text-xs font-bold text-white">-{off}%</span>}
           {product.tags?.includes("lancamento") && <span className="rounded-full bg-brand-600 px-2 py-0.5 text-xs font-bold text-white">Novo</span>}
+          {product.tags?.includes("kit") && <span className="rounded-full bg-brand-600 px-2 py-0.5 text-xs font-bold text-white">Kit</span>}
+          {product.tags?.includes("preco-lancamento") && <span className="rounded-full bg-white/90 px-2 py-0.5 text-xs font-bold text-brand-800">Preço de lançamento</span>}
         </div>
       </Link>
       <div className="flex flex-1 flex-col p-3 sm:p-4">
         <Link href={`/produto/${product.slug}`} className="line-clamp-2 min-h-[2.5rem] text-sm font-semibold text-brand-900 hover:underline sm:text-base">
           {product.name}
         </Link>
+        <span className="mt-1 text-xs text-brand-600">Fragrância: {fragranceOf(product)}</span>
         <div className="mt-2">
           {product.compareAtPrice && <span className="mr-2 text-xs text-gray-400 line-through">{formatPrice(product.compareAtPrice)}</span>}
           <span className="text-lg font-bold text-brand-800">{formatPrice(product.price)}</span>

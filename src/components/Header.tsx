@@ -2,17 +2,22 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { categories } from "@/data/products";
 import { site } from "@/data/site";
 import { useCart } from "@/context/CartContext";
-import { BagIcon, CloseIcon, MenuIcon, SearchIcon, UserIcon } from "./Icons";
+import { whatsappLink } from "@/lib/whatsapp";
+import { BagIcon, CloseIcon, MenuIcon, SearchIcon, WhatsIcon } from "./Icons";
 
 export default function Header() {
   const { count, open } = useCart();
   const router = useRouter();
   const [q, setQ] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.dataset.menuOpen = String(menuOpen);
+  }, [menuOpen]);
 
   function onSearch(e: React.FormEvent) {
     e.preventDefault();
@@ -46,9 +51,9 @@ export default function Header() {
         </Link>
         <div className="mx-6 hidden flex-1 md:block">{search}</div>
         <div className="ml-auto flex items-center gap-1 sm:gap-3">
-          <Link href="/institucional/contato" className="hidden items-center gap-2 rounded-full p-2 text-sm text-brand-800 hover:bg-brand-50 sm:flex">
-            <UserIcon /> <span className="hidden xl:inline">Atendimento</span>
-          </Link>
+          <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="hidden items-center gap-2 rounded-full p-2 text-sm text-brand-800 hover:bg-brand-50 sm:flex">
+            <WhatsIcon /> <span className="hidden xl:inline">Atendimento</span>
+          </a>
           <button onClick={open} className="relative rounded-full p-2 text-brand-800 hover:bg-brand-50" aria-label={`Carrinho, ${count} itens`}>
             <BagIcon className="h-6 w-6" />
             {count > 0 && (
@@ -85,7 +90,7 @@ export default function Header() {
                 </li>
               ))}
               <li className="border-t border-brand-100 pt-2"><Link onClick={() => setMenuOpen(false)} href="/institucional/sobre" className="block rounded px-2 py-2.5 hover:bg-brand-50">Sobre nós</Link></li>
-              <li><Link onClick={() => setMenuOpen(false)} href="/institucional/contato" className="block rounded px-2 py-2.5 hover:bg-brand-50">Atendimento</Link></li>
+              <li><a onClick={() => setMenuOpen(false)} href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="block rounded px-2 py-2.5 hover:bg-brand-50">Atendimento pelo WhatsApp</a></li>
             </ul>
           </div>
         </div>

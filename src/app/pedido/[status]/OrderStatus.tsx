@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { site } from "@/data/site";
 import { formatPrice } from "@/lib/format";
+import { whatsappLink } from "@/lib/whatsapp";
 import type { Order } from "@/lib/payments/types";
 
 const copy = {
@@ -28,7 +29,7 @@ function Content({ status }: { status: keyof typeof copy }) {
   const c = copy[status];
   const manual = status === "sucesso" && order?.manual;
   const whatsText = order
-    ? `Olá! Acabei de fazer o pedido ${order.id} no site (${formatPrice(order.total)}). Segue o comprovante.`
+    ? `Olá! Acabei de fazer o pedido ${order.id} no site da ${site.name} (${formatPrice(order.total)}).`
     : `Olá! Tenho uma dúvida sobre o pedido ${id ?? ""}.`;
 
   return (
@@ -53,8 +54,14 @@ function Content({ status }: { status: keyof typeof copy }) {
           {manual && order.paymentMethod === "pix" && (
             <div className="mt-4 rounded-xl bg-brand-50 p-4 text-sm">
               <p className="font-semibold text-brand-900">Pague via PIX</p>
-              <p className="mt-1">Chave: <strong className="select-all">{site.pixKey}</strong></p>
-              <p className="mt-1 text-gray-600">Envie o comprovante pelo WhatsApp para agilizar o envio.</p>
+              {site.pixKey ? (
+                <>
+                  <p className="mt-1">Chave: <strong className="select-all">{site.pixKey}</strong></p>
+                  <p className="mt-1 text-gray-600">Envie o comprovante pelo WhatsApp para agilizar o envio.</p>
+                </>
+              ) : (
+                <p className="mt-1 text-gray-600">Chame a gente no WhatsApp que nós enviamos a chave PIX para você concluir o pagamento.</p>
+              )}
             </div>
           )}
           {manual && order.paymentMethod !== "pix" && (
@@ -66,7 +73,7 @@ function Content({ status }: { status: keyof typeof copy }) {
       )}
 
       <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-        <a href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(whatsText)}`} target="_blank" rel="noreferrer" className="btn-primary">Falar no WhatsApp</a>
+        <a href={whatsappLink(whatsText)} target="_blank" rel="noopener noreferrer" className="btn-primary">Falar no WhatsApp</a>
         <Link href={status === "falha" ? "/carrinho" : "/produtos"} className="btn-outline">{status === "falha" ? "Tentar novamente" : "Continuar comprando"}</Link>
       </div>
     </div>
