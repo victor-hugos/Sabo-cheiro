@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -41,13 +42,13 @@ export default function Header() {
   );
 
   return (
-    <header className="sticky top-0 z-40 border-b border-brand-100 bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-brand-100 bg-cream">
       <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3">
         <button className="lg:hidden p-1 text-brand-800" onClick={() => setMenuOpen(true)} aria-label="Abrir menu">
           <MenuIcon className="h-6 w-6" />
         </button>
-        <Link href="/" className="shrink-0 font-display text-2xl font-bold text-brand-800 sm:text-3xl">
-          {site.name}
+        <Link href="/" className="shrink-0" aria-label={`${site.name}: página inicial`}>
+          <Image src="/brand/logo-horizontal.png" alt="PAUSE Sabonetes Artesanais" width={323} height={90} priority className="h-11 w-auto sm:h-14" />
         </Link>
         <div className="mx-6 hidden flex-1 md:block">{search}</div>
         <div className="ml-auto flex items-center gap-1 sm:gap-3">
@@ -65,7 +66,7 @@ export default function Header() {
         </div>
       </div>
       <div className="px-4 pb-3 md:hidden">{search}</div>
-      <nav className="hidden border-t border-brand-100 lg:block">
+      <nav className="hidden border-t border-brand-100 bg-white/60 lg:block">
         <ul className="mx-auto flex max-w-7xl items-center justify-center gap-8 px-4 py-3 text-sm font-semibold uppercase tracking-wide text-brand-800">
           <li><Link href="/produtos" className="hover:text-brand-500">Todos</Link></li>
           {categories.map((c) => (
@@ -78,8 +79,8 @@ export default function Header() {
         <div className="fixed inset-0 z-50 lg:hidden">
           <div className="absolute inset-0 bg-black/40" onClick={() => setMenuOpen(false)} />
           <div className="absolute left-0 top-0 h-full w-80 max-w-[85%] overflow-y-auto bg-white p-5 shadow-xl">
-            <div className="mb-6 flex items-center justify-between">
-              <span className="font-display text-xl font-bold text-brand-800">{site.name}</span>
+            <div className="mb-6 flex items-center justify-between rounded-xl bg-cream p-2">
+              <Image src="/brand/logo-horizontal.png" alt="PAUSE Sabonetes Artesanais" width={323} height={90} className="h-10 w-auto" />
               <button onClick={() => setMenuOpen(false)} aria-label="Fechar menu"><CloseIcon /></button>
             </div>
             <ul className="space-y-1 text-brand-900">

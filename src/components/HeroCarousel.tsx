@@ -43,7 +43,7 @@ export default function HeroCarousel() {
         {slides.map((s, idx) => (
           <div key={s.title} className="relative w-full shrink-0 bg-brand-900" aria-hidden={idx !== i}>
             <Image src={s.image} alt="" fill priority={idx === 0} sizes="100vw" className="object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-900/80 via-brand-900/45 to-transparent" />
             <div className="relative mx-auto flex min-h-[320px] max-w-7xl flex-col justify-center px-6 py-14 text-white sm:min-h-[420px] sm:px-12">
               <h1 className="max-w-xl font-display text-4xl font-bold leading-tight sm:text-6xl">{s.title}</h1>
               <p className="mt-4 max-w-md text-lg text-white/90">{s.text}</p>

@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-cream font-sans text-gray-800 antialiased;
+    @apply bg-cream font-sans text-ink antialiased;
   }
 }
 
@@ -23,10 +23,10 @@ body[data-menu-open="true"] .wa-float {
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-full bg-brand-600 px-6 py-3 font-bold text-white transition hover:bg-brand-700 disabled:cursor-not-allowed disabled:bg-gray-300;
+    @apply inline-flex items-center justify-center rounded-full bg-brand-700 px-6 py-3 font-semibold text-white transition hover:bg-brand-800 disabled:cursor-not-allowed disabled:bg-gray-300;
   }
   .btn-outline {
-    @apply inline-flex items-center justify-center rounded-full border-2 border-brand-600 px-6 py-3 font-bold text-brand-700 transition hover:bg-brand-50;
+    @apply inline-flex items-center justify-center rounded-full border-2 border-brand-700 px-6 py-3 font-semibold text-brand-700 transition hover:bg-brand-50;
   }
   .input {
     @apply w-full rounded-lg border border-brand-200 bg-white px-3 py-2.5 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100;
@@ -34,4 +34,13 @@ body[data-menu-open="true"] .wa-float {
   .label {
     @apply mb-1 block text-xs font-semibold uppercase tracking-wide text-brand-800;
   }
+}
+
+/* Títulos em Italiana (fonte de peso único, como o "PAUSE" da logo):
+   evita negrito/itálico sintéticos quando a classe font-bold é usada junto. */
+.font-display {
+  font-weight: 400 !important;
+  font-style: normal !important;
+  font-synthesis: none;
+  letter-spacing: 0.01em;
 }

@@ -35,7 +35,7 @@ export default function Home() {
         ].map((b) => (
           <Link key={b.href} href={b.href} className="group relative min-h-[240px] overflow-hidden rounded-3xl p-8 text-white sm:p-10">
             <Image src={b.image} alt="" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition duration-500 group-hover:scale-105" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/10" />
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-900/80 to-brand-900/10" />
             <div className="relative">
               <p className="text-sm font-semibold uppercase tracking-widest">{b.kicker}</p>
               <p className="mt-2 font-display text-3xl font-bold">{b.title}</p>
@@ -63,13 +63,13 @@ export default function Home() {
             ["Fragrâncias de alta qualidade", "Escolhidas a dedo para deixar um cheiro bom que fica na pele."],
           ].map(([title, text]) => (
             <li key={title} className="rounded-2xl bg-white p-5 ring-1 ring-brand-100">
-              <span className="block h-1 w-10 rounded-full bg-accent" aria-hidden />
+              <span className="block h-1 w-10 rounded-full bg-accent-soft" aria-hidden />
               <p className="mt-3 font-bold text-brand-900">{title}</p>
               <p className="mt-1 text-sm text-gray-600">{text}</p>
             </li>
           ))}
         </ul>
-        <p className="mx-auto mt-6 max-w-3xl text-center font-display text-lg italic text-brand-800">
+        <p className="mx-auto mt-8 max-w-3xl text-center font-display text-2xl leading-snug text-brand-700 sm:text-3xl">
           Independentemente da fragrância escolhida, existe um padrão de qualidade presente em todos os produtos.
         </p>
       </section>

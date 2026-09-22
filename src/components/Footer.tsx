@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { categories } from "@/data/products";
 import { site } from "@/data/site";
@@ -8,7 +9,9 @@ export default function Footer() {
     <footer className="mt-16 bg-brand-900 text-brand-100">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <p className="font-display text-2xl font-bold text-white">{site.name}</p>
+          <Link href="/" className="inline-block rounded-2xl bg-cream px-5 py-3" aria-label={`${site.name}: página inicial`}>
+            <Image src="/brand/logo-horizontal.png" alt="PAUSE Sabonetes Artesanais" width={323} height={90} className="h-12 w-auto" />
+          </Link>
           <p className="mt-3 text-sm text-brand-200">
             Sabonetes artesanais com manteiga de karité e óleo de amêndoas, feitos à mão, em pequenos lotes, para homens e
             mulheres que valorizam um bom cheiro, textura cremosa e aquele ritual que nos dá prazer.
