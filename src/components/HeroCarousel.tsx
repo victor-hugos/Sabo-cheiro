@@ -1,31 +1,32 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "./Icons";
 
-// Troque os banners aqui. Para usar imagens, adicione `image: "/banners/arquivo.jpg"`.
+// Troque os banners aqui (imagens em /public/banners ou /public/produtos).
 const slides = [
   {
     title: "Um banho que vira ritual",
-    text: "Sabonetes artesanais com óleos essenciais puros.",
+    text: "Sabonetes artesanais feitos à mão, um a um.",
     cta: "Conheça a coleção",
     href: "/produtos",
-    bg: "from-brand-700 via-brand-600 to-brand-400",
+    image: "/banners/colecao.jpg",
   },
   {
-    title: "Kits presente com até 20% OFF",
-    text: "Caixas prontas para presentear, com laço e cartão.",
-    cta: "Ver kits",
-    href: "/produtos?categoria=kits-presente",
-    bg: "from-[#b5835a] via-[#c9a27e] to-[#e8c9a8]",
+    title: "Coleção Florais",
+    text: "Relevos delicados em rosa, verde e perolado.",
+    cta: "Ver florais",
+    href: "/produtos?categoria=florais",
+    image: "/banners/florais.jpg",
   },
   {
-    title: "Lançamentos da estação",
-    text: "Mel & Aveia, Rosas Brancas e Capim-Limão chegaram.",
-    cta: "Ver novidades",
-    href: "/produtos?tag=lancamento",
-    bg: "from-[#4f7a5a] via-[#6d9d78] to-[#a8cdb0]",
+    title: "Massageadores",
+    text: "Pinos em relevo que massageiam a pele durante o banho.",
+    cta: "Ver massageadores",
+    href: "/produtos?categoria=massageadores",
+    image: "/produtos/massageador-laranja-2.jpg",
   },
 ];
 
@@ -40,8 +41,10 @@ export default function HeroCarousel() {
     <section className="relative overflow-hidden" aria-roledescription="carrossel">
       <div className="flex transition-transform duration-700" style={{ transform: `translateX(-${i * 100}%)` }}>
         {slides.map((s, idx) => (
-          <div key={s.title} className={`w-full shrink-0 bg-gradient-to-r ${s.bg}`} aria-hidden={idx !== i}>
-            <div className="mx-auto flex min-h-[320px] max-w-7xl flex-col justify-center px-6 py-14 text-white sm:min-h-[420px] sm:px-12">
+          <div key={s.title} className="relative w-full shrink-0 bg-brand-900" aria-hidden={idx !== i}>
+            <Image src={s.image} alt="" fill priority={idx === 0} sizes="100vw" className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+            <div className="relative mx-auto flex min-h-[320px] max-w-7xl flex-col justify-center px-6 py-14 text-white sm:min-h-[420px] sm:px-12">
               <h1 className="max-w-xl font-display text-4xl font-bold leading-tight sm:text-6xl">{s.title}</h1>
               <p className="mt-4 max-w-md text-lg text-white/90">{s.text}</p>
               <Link href={s.href} tabIndex={idx === i ? 0 : -1} className="mt-8 inline-flex w-fit rounded-full bg-white px-7 py-3 font-bold text-brand-800 shadow transition hover:bg-brand-50">

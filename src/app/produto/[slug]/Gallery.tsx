@@ -7,7 +7,7 @@ export default function Gallery({ images, alt }: { images: string[]; alt: string
   const [active, setActive] = useState(0);
   return (
     <div>
-      <div className="relative aspect-square overflow-hidden rounded-3xl bg-brand-50">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-brand-50">
         <Image src={images[active]} alt={alt} fill priority sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
       </div>
       {images.length > 1 && (

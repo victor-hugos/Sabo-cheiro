@@ -13,7 +13,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
   return (
     <div className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-brand-100 transition hover:shadow-lg">
-      <Link href={`/produto/${product.slug}`} className="relative block aspect-square overflow-hidden bg-brand-50">
+      <Link href={`/produto/${product.slug}`} className="relative block aspect-[4/5] overflow-hidden bg-brand-50">
         <Image
           src={product.images[0]}
           alt={product.name}

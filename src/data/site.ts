@@ -3,7 +3,7 @@ export const site = {
   name: "Sabo Cheiro",
   tagline: "Sabonetes artesanais que perfumam o seu dia",
   description:
-    "Sabonetes artesanais, naturais e cheirosos, feitos à mão com óleos vegetais e essências selecionadas.",
+    "Sabonetes artesanais feitos à mão: massageadores, florais e peças especiais para presentear.",
   whatsapp: "5511999999999", // apenas números, com DDI + DDD
   email: "contato@sabocheiro.com.br",
   instagram: "https://instagram.com/sabocheiro",

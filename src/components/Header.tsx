@@ -66,7 +66,6 @@ export default function Header() {
           {categories.map((c) => (
             <li key={c.slug}><Link href={`/produtos?categoria=${c.slug}`} className="hover:text-brand-500">{c.name}</Link></li>
           ))}
-          <li><Link href="/produtos?tag=promocao" className="text-accent hover:opacity-80">Ofertas</Link></li>
         </ul>
       </nav>
 
@@ -85,7 +84,6 @@ export default function Header() {
                   <Link onClick={() => setMenuOpen(false)} href={`/produtos?categoria=${c.slug}`} className="block rounded px-2 py-2.5 hover:bg-brand-50">{c.name}</Link>
                 </li>
               ))}
-              <li><Link onClick={() => setMenuOpen(false)} href="/produtos?tag=promocao" className="block rounded px-2 py-2.5 font-semibold text-accent hover:bg-brand-50">Ofertas</Link></li>
               <li className="border-t border-brand-100 pt-2"><Link onClick={() => setMenuOpen(false)} href="/institucional/sobre" className="block rounded px-2 py-2.5 hover:bg-brand-50">Sobre nós</Link></li>
               <li><Link onClick={() => setMenuOpen(false)} href="/institucional/contato" className="block rounded px-2 py-2.5 hover:bg-brand-50">Atendimento</Link></li>
             </ul>

@@ -4,9 +4,9 @@ import { site } from "./site";
 export const pages: Record<string, { title: string; body: string }> = {
   sobre: {
     title: "Sobre nós",
-    body: `A ${site.name} nasceu do amor por aromas e pelo cuidado artesanal. Cada sabonete é produzido à mão, em pequenos lotes, com óleos vegetais, manteigas nobres e óleos essenciais puros.
+    body: `A ${site.name} nasceu do amor por aromas e pelo cuidado artesanal. Cada sabonete é produzido à mão, em pequenos lotes, com moldes e acabamentos escolhidos com carinho.
 
-Acreditamos que o banho pode ser um momento de pausa e autocuidado. Por isso, escolhemos ingredientes naturais, não usamos parabenos nem corantes artificiais e não testamos em animais.
+Acreditamos que o banho pode ser um momento de pausa e autocuidado. Por isso, cada peça é feita e embalada individualmente, com atenção a cada detalhe.
 
 Obrigado por fazer parte da nossa história!`,
   },

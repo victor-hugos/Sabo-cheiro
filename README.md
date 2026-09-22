@@ -36,14 +36,14 @@ npm run dev        # http://localhost:3000
 
 ### Cadastrando o catálogo
 
-1. Copie as fotos do catálogo para `public/produtos/` (JPG, PNG ou WebP, de preferência quadradas, com 1000×1000 px ou mais).
+1. Copie as fotos do catálogo para `public/produtos/` em **JPG, PNG ou WebP** (fotos HEIC do iPhone não abrem no Chrome; converta antes ou peça para convertê-las). As fotos originais em HEIC ficam guardadas em `fotos-originais/`, que não é publicada.
 2. Em `src/data/products.ts`, edite ou adicione um item para cada produto:
    ```ts
    {
      id: "SB010",                       // código único
      slug: "sabonete-de-camomila",      // aparece na URL
      name: "Sabonete de Camomila",
-     category: "sabonetes-em-barra",
+     category: "florais",               // massageadores | florais | especiais
      price: 23.9,
      compareAtPrice: 27.9,              // opcional (preço riscado)
      images: ["/produtos/camomila.jpg", "/produtos/camomila-2.jpg"],
@@ -55,7 +55,7 @@ npm run dev        # http://localhost:3000
      stock: 20,
    }
    ```
-3. As imagens `.svg` atuais são provisórias. Apague-as quando as fotos reais estiverem no lugar.
+3. Os **preços, estoques e nomes atuais são provisórios**. Confirme cada um antes de publicar.
 
 ## Pagamentos
 
